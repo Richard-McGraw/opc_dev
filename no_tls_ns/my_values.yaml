@@ -1,0 +1,17 @@
+# Custom values for the Vault chart
+global:
+  # If deploying to OpenShift
+  openshift: true
+  externalVaultAddr: "http://192.168.40.199:8200"
+injector:
+  enabled: true
+  logLevel: "trace"
+  #externalVaultAddr: "http://192.168.40.199:8200"
+  image:
+    repository: "registry.connect.redhat.com/hashicorp/vault-k8s"
+    tag: "1.2.1-ubi"
+  agentImage:
+    repository: "registry.connect.redhat.com/hashicorp/vault"
+    tag: "1.13.1-ubi"
+authDelegator:
+  enabled: true
