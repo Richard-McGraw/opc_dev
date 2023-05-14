@@ -49,15 +49,15 @@ vault kv put kv/webapp/config username="static-user-csi" password="static-passwo
 
 
 #create service account
-oc create sa webapp-sa
+oc create sa -n csi-webapp webapp-sa
 
 #create secret with vault ca
-oc apply -n vault-auth-csi -f vault-server-tls-secrets.yaml
+oc apply -n csi-webapp -f vault-server-tls-secrets.yaml
 
 #deploy secret provider
-oc apply -n vault-auth-csi -f webapp-secret-provider-class.yml
+oc apply -n csi-webapp -f webapp-secret-provider-class.yml
 #deploy app
-oc apply -n vault-auth-csi -f webapp-pod.yaml
+oc apply -n csi-webapp -f webapp-pod.yaml
 
 #check mounted file
 oc exec -it pod/webapp -- /bin/sh
