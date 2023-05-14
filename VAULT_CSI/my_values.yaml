@@ -1,0 +1,35 @@
+global:
+  openshift: true
+server:
+  enabled: false
+  image:
+    repository: "registry.connect.redhat.com/hashicorp/vault-k8s"
+    tag: "1.2.1-ubi"
+  agentImage:
+    repository: "registry.connect.redhat.com/hashicorp/vault"
+    tag: "1.13.1-ubi"
+injector:
+  enabled: false
+  image:
+    repository: "registry.connect.redhat.com/hashicorp/vault-k8s"
+    tag: "1.2.1-ubi"
+  agentImage:
+    repository: "registry.connect.redhat.com/hashicorp/vault"
+    tag: "1.13.1-ubi"
+csi:
+  enabled: true
+  agent:
+    image:
+      repository: "registry.connect.redhat.com/hashicorp/vault"
+      tag: "1.13.1-ubi"
+  extraArgs:
+    - -vault-addr=https://vault-test.nase.team
+    - -vault-tls-ca-cert=/mnt/tls/ca.crt
+  volumes:
+  - name: vault-server-tls
+    secret:
+      secretName: vault-server-tls
+  volumeMounts:
+  - name: vault-server-tls
+    mountPath: /mnt/tls
+    readOnly: true
