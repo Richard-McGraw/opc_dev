@@ -28,6 +28,7 @@ jobs:
           echo "Tags: $TAGS"
           echo "Environment: $ENVIRONMENT"
           sleep 60
+          exit 1
         env:
           LEVEL: ${{ inputs.logLevel }}
           TAGS: ${{ inputs.tags }}
